@@ -136,7 +136,6 @@ void ComponentBase::__ComponentBase(void)
     bufferwork = NULL;
 
     pthread_mutex_init(&ports_block, NULL);
-    pthread_mutex_init(&state_block, NULL);
 }
 
 ComponentBase::ComponentBase()
@@ -153,7 +152,6 @@ ComponentBase::ComponentBase(const OMX_STRING name)
 ComponentBase::~ComponentBase()
 {
     pthread_mutex_destroy(&ports_block);
-    pthread_mutex_destroy(&state_block);
 
     if (roles) {
         if (roles[0])
@@ -777,9 +775,7 @@ OMX_ERRORTYPE ComponentBase::CBaseGetState(
     if (hComponent != handle)
         return OMX_ErrorBadParameter;
 
-    pthread_mutex_lock(&state_block);
     *pState = state;
-    pthread_mutex_unlock(&state_block);
     return OMX_ErrorNone;
 }
 OMX_ERRORTYPE ComponentBase::UseBuffer(
@@ -1164,9 +1160,7 @@ void ComponentBase::CmdHandler(struct cmd_s *cmd)
     case OMX_CommandStateSet: {
         OMX_STATETYPE transition = (OMX_STATETYPE)cmd->param1;
 
-        pthread_mutex_lock(&state_block);
         TransState(transition);
-        pthread_mutex_unlock(&state_block);
         break;
     }
     case OMX_CommandFlush: {
@@ -1238,6 +1232,7 @@ static inline const char *GetStateName(OMX_STATETYPE state)
 void ComponentBase::TransState(OMX_STATETYPE transition)
 {
     OMX_STATETYPE current = this->state;
+    OMX_STATETYPE dest = this->state;
     OMX_EVENTTYPE event;
     OMX_U32 data1, data2;
     OMX_ERRORTYPE ret;
@@ -1283,7 +1278,7 @@ notify_event:
         data1 = OMX_CommandStateSet;
         data2 = transition;
 
-        state = transition;
+        dest = transition;
         LOGD("%s:%s: transition from %s to %s completed",
              GetName(), GetWorkingRole(),
              GetStateName(current), GetStateName(transition));
@@ -1294,7 +1289,7 @@ notify_event:
         data2 = 0;
 
         if (transition == OMX_StateInvalid || ret == OMX_ErrorInvalidState) {
-            state = OMX_StateInvalid;
+            dest = OMX_StateInvalid;
             LOGE("%s:%s: exit failure, transition from %s to %s, "
                  "current state is %s\n",
                  GetName(), GetWorkingRole(), GetStateName(current),
@@ -1308,6 +1303,7 @@ notify_event:
     if (ret == OMX_ErrorNone && transition == OMX_StateWaitForResources)
         callbacks->EventHandler(handle, appdata,
                                 OMX_EventResourcesAcquired, 0, 0, NULL);
+    state = dest;
 }
 
 inline OMX_ERRORTYPE ComponentBase::TransStateToLoaded(OMX_STATETYPE current)
