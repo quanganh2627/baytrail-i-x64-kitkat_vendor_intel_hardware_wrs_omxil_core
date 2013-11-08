@@ -761,6 +761,18 @@ OMX_ERRORTYPE ComponentBase::CBaseGetExtensionIndex(
         return OMX_ErrorNone;
     }
 
+#ifdef TARGET_HAS_VPP
+    if (!strcmp(cParameterName, "OMX.Intel.index.vppBufferNum")) {
+        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtVppBufferNum);
+        return OMX_ErrorNone;
+    }
+#endif
+    
+	if (!strcmp(cParameterName, "OMX.Intel.index.enableErrorReport")) {
+        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtEnableErrorReport);
+        return OMX_ErrorNone;
+    }
+
     return OMX_ErrorUnsupportedIndex;
 }
 
@@ -990,9 +1002,6 @@ OMX_ERRORTYPE ComponentBase::CBaseEmptyThisBuffer(
             port = ports[port_index];
 
     if (!port)
-        return OMX_ErrorBadParameter;
-
-    if (pBuffer->pInputPortPrivate != port)
         return OMX_ErrorBadParameter;
 
     if (port->IsEnabled()) {

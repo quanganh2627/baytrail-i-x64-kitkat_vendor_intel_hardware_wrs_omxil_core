@@ -361,17 +361,16 @@ OMX_ERRORTYPE PortBase::UseBuffer(OMX_BUFFERHEADERTYPE **ppBufferHdr,
     buffer_hdr->pBuffer = pBuffer;
     buffer_hdr->nAllocLen = nSizeBytes;
     buffer_hdr->pAppPrivate = pAppPrivate;
+    buffer_hdr->pInputPortPrivate = NULL;
     if (portdefinition.eDir == OMX_DirInput) {
         buffer_hdr->nInputPortIndex = nPortIndex;
         buffer_hdr->nOutputPortIndex = 0x7fffffff;
-        buffer_hdr->pInputPortPrivate = this;
         buffer_hdr->pOutputPortPrivate = NULL;
     }
     else {
         buffer_hdr->nOutputPortIndex = nPortIndex;
         buffer_hdr->nInputPortIndex = 0x7fffffff;
         buffer_hdr->pOutputPortPrivate = this;
-        buffer_hdr->pInputPortPrivate = NULL;
     }
 
     buffer_hdrs = __list_add_tail(buffer_hdrs, entry);
@@ -462,17 +461,16 @@ OMX_ERRORTYPE PortBase:: AllocateBuffer(OMX_BUFFERHEADERTYPE **ppBuffer,
 
     buffer_hdr->nAllocLen = nSizeBytes;
     buffer_hdr->pAppPrivate = pAppPrivate;
+    buffer_hdr->pInputPortPrivate = NULL;
     if (portdefinition.eDir == OMX_DirInput) {
         buffer_hdr->nInputPortIndex = nPortIndex;
         buffer_hdr->nOutputPortIndex = (OMX_U32)-1;
-        buffer_hdr->pInputPortPrivate = this;
         buffer_hdr->pOutputPortPrivate = NULL;
     }
     else {
         buffer_hdr->nOutputPortIndex = nPortIndex;
         buffer_hdr->nInputPortIndex = (OMX_U32)-1;
         buffer_hdr->pOutputPortPrivate = this;
-        buffer_hdr->pInputPortPrivate = NULL;
     }
 
     buffer_hdrs = __list_add_tail(buffer_hdrs, entry);
@@ -956,8 +954,12 @@ OMX_ERRORTYPE PortBase::TransState(OMX_U8 transition)
         portdefinition.bEnabled = OMX_TRUE;
     }
     else if(transition == OMX_PortDisabled) {
-        FlushPort();
-        WaitPortBufferCompletion();
+        /*need to flush only if port is not empty*/
+        if (nr_buffer_hdrs)
+        {
+            FlushPort();
+            WaitPortBufferCompletion();
+        }
         portdefinition.bEnabled = OMX_FALSE;
     }
     else {
