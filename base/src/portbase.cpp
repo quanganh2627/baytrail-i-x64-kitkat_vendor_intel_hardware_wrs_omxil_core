@@ -454,7 +454,7 @@ OMX_ERRORTYPE PortBase:: AllocateBuffer(OMX_BUFFERHEADERTYPE **ppBuffer,
         buffer_hdr->pBuffer = (*custom_mem_alloc)(nSizeBytes, custom_mem_userdata);
     } else {
         if (mem_alignment > 0)
-            buffer_hdr->pBuffer = (OMX_U8 *)(((OMX_U32)((OMX_U8 *)buffer_hdr + sizeof(*buffer_hdr)) / mem_alignment + 1) * mem_alignment);
+            buffer_hdr->pBuffer = (OMX_U8 *)(((intptr_t)((OMX_U8 *)buffer_hdr + sizeof(*buffer_hdr)) / mem_alignment + 1) * mem_alignment);
         else
             buffer_hdr->pBuffer = (OMX_U8 *)buffer_hdr + sizeof(*buffer_hdr);
     }
@@ -877,9 +877,9 @@ void PortBase::ReturnOneRetainedBuffer(void)
 
     if (buffer) {
         LOGV("%s(): %s:%s:PortIndex %lu: returns a retained buffer "
-             "(%p:%d/%d)\n", __FUNCTION__, cbase->GetName(),
+             "(%p:%d)\n", __FUNCTION__, cbase->GetName(),
              cbase->GetWorkingRole(), portdefinition.nPortIndex,
-             buffer, i++, queue_length(&retainedbufferq));
+             buffer, queue_length(&retainedbufferq));
 
         ret = ReturnThisBuffer(buffer);
         if (ret != OMX_ErrorNone)
