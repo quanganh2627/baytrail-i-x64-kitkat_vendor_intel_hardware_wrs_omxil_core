@@ -1913,7 +1913,9 @@ void ComponentBase::Work(void)
             retain[i] = BUFFER_RETAIN_NOT_RETAIN;
         }
 
-        if (working_role != NULL && !strncmp((char*)working_role, "video_decoder", 13)){
+        if (working_role != NULL &&
+                (!strncmp((char*)working_role, "video_decoder", 13)
+                    || !strncmp((char*)working_role, "video.postprocess", 17))){
             ret = ProcessorProcess(buffers, &retain[0], nr_ports);
         }else{
             ret = ProcessorProcess(buffers_hdr, &retain[0], nr_ports);
