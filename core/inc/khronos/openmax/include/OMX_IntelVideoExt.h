@@ -148,6 +148,7 @@ typedef struct OMX_VIDEO_CONFIG_INTEL_ERROR_REPORT {
 } OMX_VIDEO_CONFIG_INTEL_ERROR_REPORT;
 
 #define MAX_ERR_NUM 10
+#define MAX_ERR_BUFFERS 20
 
 typedef enum
 {
@@ -169,6 +170,13 @@ typedef struct OMX_VIDEO_ERROR_BUFFER {
     OMX_U32 errorNumber;   // Error number should be no more than MAX_ERR_NUM
     OMX_S64 timeStamp;      // presentation time stamp
     OMX_VIDEO_ERROR_INFO errorArray[MAX_ERR_NUM];
+};
+
+typedef struct OMX_VIDEO_OUTPUT_ERROR_BUFFERS {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_VIDEO_ERROR_BUFFER errorBuffers[MAX_ERR_BUFFERS];
 };
 
 // Force K frame for VP8 encode

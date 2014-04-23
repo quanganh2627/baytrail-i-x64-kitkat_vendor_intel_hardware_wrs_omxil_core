@@ -65,6 +65,7 @@ typedef enum OMX_INTELINDEXEXTTYPE {
     OMX_IndexExtPrependSPSPPS,
     /* Error report by WebRTC */
     OMX_IndexExtEnableErrorReport,                  /**<reference: EnableErrorReport for decoder */
+    OMX_IndexExtOutputErrorBuffers,                 /**<reference: OMX_VIDEO_OUTPUT_ERROR_BUFFERS */
     OMX_IndexExtPrepareForAdaptivePlayback,         /**<reference: Prepare for AdaptivePlayback*/
     OMX_IndexExtVP8MaxFrameSizeRatio,               /**<reference: For VP8 Max Frame Size*/
     OMX_IndexExtTemporalLayer,                      /**<reference: For Temporal Layer*/

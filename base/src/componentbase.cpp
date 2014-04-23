@@ -825,6 +825,11 @@ OMX_ERRORTYPE ComponentBase::CBaseGetExtensionIndex(
         return OMX_ErrorNone;
     }
 
+    if (!strcmp(cParameterName, "OMX.Intel.index.outputErrorBuffers")) {
+        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtOutputErrorBuffers);
+        return OMX_ErrorNone;
+    }
+
     if (!strcmp(cParameterName, "OMX.google.android.index.prepareForAdaptivePlayback")) {
         *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtPrepareForAdaptivePlayback);
         return OMX_ErrorNone;
