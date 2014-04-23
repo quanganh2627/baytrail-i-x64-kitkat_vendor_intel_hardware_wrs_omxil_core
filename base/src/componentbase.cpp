@@ -830,10 +830,6 @@ OMX_ERRORTYPE ComponentBase::CBaseGetExtensionIndex(
         return OMX_ErrorNone;
     }
 
-    if (!strcmp(cParameterName, "OMX.Intel.index.vp8ForceKFrame")) {
-        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtVP8ForceKFrame);
-        return OMX_ErrorNone;
-    }
     if (!strcmp(cParameterName, "OMX.Intel.index.requestBlackFramePointer")) {
         *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtRequestBlackFramePointer);
         return OMX_ErrorNone;
