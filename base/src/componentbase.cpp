@@ -840,8 +840,8 @@ OMX_ERRORTYPE ComponentBase::CBaseGetExtensionIndex(
         return OMX_ErrorNone;
     }
 
-    if (!strcmp(cParameterName, "OMX.Intel.index.numberOfTemporalLayer")) {
-        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtNumberOfTemporalLayer);
+    if (!strcmp(cParameterName, "OMX.Intel.index.temporalLayer")) {
+        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtTemporalLayer);
         return OMX_ErrorNone;
     }
 
