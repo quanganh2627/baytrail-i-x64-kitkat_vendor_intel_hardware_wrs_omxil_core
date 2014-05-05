@@ -211,7 +211,7 @@ typedef struct OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER {
     OMX_U32 nSize;
     OMX_VERSIONTYPE nVersion;
     OMX_U32 nPortIndex;
-    OMX_U32 nFramePointer;
+    OMX_PTR nFramePointer;
 } OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER;
 
 #ifdef __cplusplus
