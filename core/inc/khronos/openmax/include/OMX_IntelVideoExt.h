@@ -63,23 +63,14 @@ typedef struct OMX_VIDEO_CONFIG_INTEL_BITRATETYPE {
      OMX_U32 nWindowSize;          // Window size in milliseconds allowed for bitrate to reach target
      OMX_U32 nInitialQP;           // Initial QP for I frames
      OMX_U32 nMinQP;
+     OMX_U32 nMaxQP;
+     OMX_U32 nFrameRate;
+     OMX_U32 nTemporalID;
 } OMX_VIDEO_CONFIG_INTEL_BITRATETYPE;
 
-typedef enum OMX_VIDEO_INTEL_CONTROLRATETYPE {
-    OMX_Video_Intel_ControlRateDisable,
-    OMX_Video_Intel_ControlRateVariable,
-    OMX_Video_Intel_ControlRateConstant,
-    OMX_Video_Intel_ControlRateVideoConferencingMode,
-    OMX_Video_Intel_ControlRateMax = 0x7FFFFFFF
-} OMX_VIDEO_INTEL_CONTROLRATETYPE;
-
-typedef struct OMX_VIDEO_PARAM_INTEL_BITRATETYPE {
-     OMX_U32 nSize;
-     OMX_VERSIONTYPE nVersion;
-     OMX_U32 nPortIndex;
-     OMX_VIDEO_INTEL_CONTROLRATETYPE eControlRate;
-     OMX_U32 nTargetBitrate;
-} OMX_VIDEO_PARAM_INTEL_BITRATETYPE;
+typedef enum  {
+    OMX_Video_Intel_ControlRateVideoConferencingMode = OMX_Video_ControlRateVendorStartUnused + 1
+};
 
 typedef struct OMX_VIDEO_PARAM_INTEL_AVC_DECODE_SETTINGS {
      OMX_U32 nSize;                       // Size of the structure
@@ -194,6 +185,15 @@ typedef struct OMX_VIDEO_CONFIG_INTEL_VP8_MAX_FRAME_SIZE_RATIO {
     OMX_U32 nMaxFrameSizeRatio;
 } OMX_VIDEO_CONFIG_INTEL_VP8_MAX_FRAME_SIZE_RATIO;
 
+// temporal layer for Sand
+typedef struct OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER {
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_U32 nNumberOfTemporalLayer;
+    OMX_U32 nPeriodicity;
+    OMX_U32 nLayerID[32];
+} OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER;
 
 #ifdef __cplusplus
 }

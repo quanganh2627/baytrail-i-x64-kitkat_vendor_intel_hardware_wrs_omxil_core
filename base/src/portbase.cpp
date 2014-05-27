@@ -843,6 +843,7 @@ void PortBase::ReturnOneRetainedBuffer(void)
 {
     OMX_BUFFERHEADERTYPE *buffer;
     OMX_ERRORTYPE ret;
+    int i =0;
 
     pthread_mutex_lock(&retainedbufferq_lock);
 
