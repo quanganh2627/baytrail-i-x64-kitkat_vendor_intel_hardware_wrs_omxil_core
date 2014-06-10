@@ -585,6 +585,9 @@ OMX_ERRORTYPE ComponentBase::CBaseSetParameter(
         }
 
         if (working_role != NULL && !strncmp((char*)working_role, "video_encoder", 13)) {
+            if (p->format.video.nFrameWidth > 2048 || p->format.video.nFrameHeight > 2048)
+                return OMX_ErrorUnsupportedSetting;
+
             if(p->format.video.eColorFormat == OMX_COLOR_FormatUnused)
                 p->nBufferSize = p->format.video.nFrameWidth * p->format.video.nFrameHeight *3/2;
         }
