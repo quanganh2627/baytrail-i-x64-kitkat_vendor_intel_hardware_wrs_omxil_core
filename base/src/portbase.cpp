@@ -1089,7 +1089,21 @@ OMX_ERRORTYPE PortBase::ReportOutputCrop(void)
     return ret;
 }
 
+OMX_ERRORTYPE PortBase::ReportEvent(OMX_EVENTTYPE eventType)
+{
+    OMX_ERRORTYPE ret;
 
+    if (eventType < 0 || eventType > OMX_EventMax) {
+        LOGE("invalid parameters for EventHandler!");
+        return OMX_ErrorBadParameter;
+    }
+
+    ret = callbacks->EventHandler(owner, appdata,
+                                  eventType,
+                                  portdefinition.nPortIndex, 0, NULL);
+
+    return ret;
+}
 /* end of component methods & helpers */
 
 /* end of PortBase */
