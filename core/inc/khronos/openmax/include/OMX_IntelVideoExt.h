@@ -179,6 +179,17 @@ typedef struct OMX_VIDEO_OUTPUT_ERROR_BUFFERS {
     OMX_VIDEO_ERROR_BUFFER errorBuffers[MAX_ERR_BUFFERS];
 };
 
+typedef struct OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE {
+    OMX_BOOL bPreviousFrameRefresh;
+    OMX_U32 nGoldenFrameRefresh;
+    OMX_U32 nAlternateFrameRefresh;
+    OMX_BOOL bUsePreviousFrame;
+    OMX_BOOL bUseGoldenFrame;
+    OMX_BOOL bUseAlternateFrame;
+    OMX_BOOL bUpdateEntropy;
+} OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE;
+
+
 // Force K frame for VP8 encode
 typedef struct OMX_VIDEO_CONFIG_INTEL_VP8_FORCE_KFRAME {
     OMX_U32 nSize;
@@ -203,6 +214,7 @@ typedef struct OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER {
     OMX_U32 nNumberOfTemporalLayer;
     OMX_U32 nPeriodicity;
     OMX_U32 nLayerID[32];
+    OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE nVP8RefFrameType[32];
 } OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER;
 
 
