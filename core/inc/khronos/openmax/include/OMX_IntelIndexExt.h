@@ -69,6 +69,7 @@ typedef enum OMX_INTELINDEXEXTTYPE {
     OMX_IndexExtPrepareForAdaptivePlayback,         /**<reference: Prepare for AdaptivePlayback*/
     OMX_IndexExtVP8MaxFrameSizeRatio,               /**<reference: For VP8 Max Frame Size*/
     OMX_IndexExtTemporalLayer,                      /**<reference: For Temporal Layer*/
+    OMX_IndexExtVP8Parameters,                       /**< reference: For VP8 HRD Buffer fullness/optimal/initial/MinQP/MaxQP*/
     OMX_IndexExtRequestBlackFramePointer,           /**<reference: OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER*/
 
     // Index for VPP must always be put at the end

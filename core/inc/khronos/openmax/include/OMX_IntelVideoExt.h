@@ -217,6 +217,18 @@ typedef struct OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER {
     OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE nVP8RefFrameType[32];
 } OMX_VIDEO_PARAM_INTEL_TEMPORAL_LAYER;
 
+// hrd buffer parameter minQP manQP for Sand VP8 encode
+typedef struct OMX_VIDEO_INTEL_VP8_PARAM{
+    OMX_U32 nSize;
+    OMX_VERSIONTYPE nVersion;
+    OMX_U32 nPortIndex;
+    OMX_U32 nHrdbuf_fullness;
+    OMX_U32 nHrdbuf_initial;
+    OMX_U32 nHrdbuf_optimal;
+    OMX_U32 nMin_qp;
+    OMX_U32 nMax_qp;
+    OMX_U32 nMaxNumOfConsecutiveDropFrames;
+} OMX_VIDEO_INTEL_VP8_PARAM;
 
 // Request OMX to allocate a black frame to video mute feature
 typedef struct OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER {

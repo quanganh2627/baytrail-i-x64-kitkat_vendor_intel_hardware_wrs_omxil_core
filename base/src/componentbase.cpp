@@ -873,6 +873,11 @@ OMX_ERRORTYPE ComponentBase::CBaseGetExtensionIndex(
         return OMX_ErrorNone;
     }
 
+    if (!strcmp(cParameterName, "OMX.Intel.index.vp8Parameters")) {
+        *pIndexType = static_cast<OMX_INDEXTYPE>(OMX_IndexExtVP8Parameters);
+        return OMX_ErrorNone;
+    }
+
     return OMX_ErrorUnsupportedIndex;
 }
 
