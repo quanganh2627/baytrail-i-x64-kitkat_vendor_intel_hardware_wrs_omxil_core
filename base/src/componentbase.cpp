@@ -38,6 +38,8 @@
 
 static const OMX_U32 kMaxAdaptiveStreamingWidth = 1920;
 static const OMX_U32 kMaxAdaptiveStreamingHeight = 1088;
+static const OMX_U32 kMinAdaptiveStreamingWidth = 1280;
+static const OMX_U32 kMinAdaptiveStreamingHeight = 720;
 /*
  * CmdProcessWork
  */
@@ -656,7 +658,14 @@ OMX_ERRORTYPE ComponentBase::CBaseSetParameter(
 
         mMaxFrameWidth = p->nMaxFrameWidth;
         mMaxFrameHeight = p->nMaxFrameHeight;
-        /* update output port definition */
+        // We dont want to frequently re-allocate buffer for lower resolution changes
+        // especially for vp9 gralloc buffer mapping.
+        if ((mMaxFrameWidth < kMinAdaptiveStreamingWidth) &&
+            (mMaxFrameHeight < kMinAdaptiveStreamingHeight)) {
+            mMaxFrameWidth = kMinAdaptiveStreamingWidth;
+            mMaxFrameHeight = kMinAdaptiveStreamingHeight;
+        }
+       /* update output port definition */
         OMX_PARAM_PORTDEFINITIONTYPE paramPortDefinitionOutput;
         if (nr_ports > p->nPortIndex && ports[p->nPortIndex]) {
             memcpy(&paramPortDefinitionOutput,ports[p->nPortIndex]->GetPortDefinition(),
