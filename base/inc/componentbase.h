@@ -292,6 +292,9 @@ protected:
     /* adaptive playback param */
     OMX_BOOL mEnableAdaptivePlayback;
 
+    /* whether to force buffer reallocation */
+    OMX_BOOL mForceBufferRealloc;
+
 private:
     /* common routines for constructor */
     void __ComponentBase(void);
