@@ -38,6 +38,9 @@
 
 static const OMX_U32 kMaxAdaptiveStreamingWidth = 1920;
 static const OMX_U32 kMaxAdaptiveStreamingHeight = 1088;
+static const OMX_U32 kMaxForceBufferReallocWidth = 1920;
+static const OMX_U32 kMaxForceBufferReallocHeight = 1920;
+
 /*
  * CmdProcessWork
  */
@@ -131,6 +134,7 @@ void ComponentBase::__ComponentBase(void)
     ports = NULL;
     nr_ports = 0;
     mEnableAdaptivePlayback = OMX_FALSE;
+    mForceBufferRealloc = OMX_FALSE;
     memset(&portparam, 0, sizeof(portparam));
 
     state = OMX_StateUnloaded;
@@ -640,6 +644,12 @@ OMX_ERRORTYPE ComponentBase::CBaseSetParameter(
 
         if (!(working_role != NULL && !strncmp((char*)working_role, "video_decoder", 13)))
             return  OMX_ErrorBadParameter;
+
+        if (p->bEnable && (p->nMaxFrameWidth == kMaxForceBufferReallocWidth &&
+            p->nMaxFrameHeight == kMaxForceBufferReallocHeight)) {
+            LOGW(" Buffer should be reallocated!");
+            mForceBufferRealloc = OMX_TRUE;
+        }
 
         if (p->nMaxFrameWidth > kMaxAdaptiveStreamingWidth
                 || p->nMaxFrameHeight > kMaxAdaptiveStreamingHeight) {
