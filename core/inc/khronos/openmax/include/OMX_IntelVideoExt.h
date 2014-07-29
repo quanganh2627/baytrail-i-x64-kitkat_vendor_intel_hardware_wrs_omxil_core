@@ -190,14 +190,6 @@ typedef struct OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE {
 } OMX_VIDEO_INTEL_VP8REFERENCEFRAMETYPE;
 
 
-// Force K frame for VP8 encode
-typedef struct OMX_VIDEO_CONFIG_INTEL_VP8_FORCE_KFRAME {
-    OMX_U32 nSize;
-    OMX_VERSIONTYPE nVersion;
-    OMX_U32 nPortIndex;
-    OMX_BOOL bForceKFrame;
-} OMX_VIDEO_CONFIG_INTEL_VP8_FORCE_KFRAME;
-
 // max frame size for VP8 encode during WebRTC feature
 typedef struct OMX_VIDEO_CONFIG_INTEL_VP8_MAX_FRAME_SIZE_RATIO {
     OMX_U32 nSize;
