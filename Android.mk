@@ -8,7 +8,8 @@ LOCAL_COPY_HEADERS_TO := khronos/openmax
 LOCAL_COPY_HEADERS := \
     core/inc/khronos/openmax/include/OMX_IntelErrorTypes.h \
     core/inc/khronos/openmax/include/OMX_IntelIndexExt.h \
-    core/inc/khronos/openmax/include/OMX_IntelVideoExt.h
+    core/inc/khronos/openmax/include/OMX_IntelVideoExt.h \
+    core/inc/khronos/openmax/include/OMX_IntelColorFormatExt.h
 
 include $(BUILD_COPY_HEADERS)
 
