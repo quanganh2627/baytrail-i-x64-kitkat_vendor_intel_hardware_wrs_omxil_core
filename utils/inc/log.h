@@ -21,6 +21,12 @@
 
 #ifdef ANDROID
  #include <cutils/log.h>
+ #define LOGE ALOGE
+ #define LOGW ALOGW
+ #define LOGI ALOGI
+ #define LOGD ALOGD
+ #define LOGV ALOGV
+ #define LOGV_IF ALOGV_IF
 #else
  #include <stdio.h>
  #define LOG(_p, ...) \

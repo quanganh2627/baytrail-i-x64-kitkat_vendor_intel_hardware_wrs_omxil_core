@@ -230,6 +230,9 @@ typedef struct OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER {
     OMX_PTR nFramePointer;
 } OMX_VIDEO_INTEL_REQUEST_BALCK_FRAME_POINTER;
 
+#define OMX_BUFFERFLAG_TFF 0x00010000
+#define OMX_BUFFERFLAG_BFF 0x00020000
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */
