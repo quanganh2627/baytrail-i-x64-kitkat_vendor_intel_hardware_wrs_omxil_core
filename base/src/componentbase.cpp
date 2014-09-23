@@ -1492,7 +1492,7 @@ inline OMX_ERRORTYPE ComponentBase::TransStateToIdle(OMX_STATETYPE current)
             if (ports[i]->IsEnabled()) {
                 if (GetWorkingRole() != NULL &&
                         !strncmp (GetWorkingRole(),"video_decoder", 13 )) {
-                    ret = ports[i]->WaitPortBufferCompletionTimeout(800);
+                    ret = ports[i]->WaitPortBufferCompletionTimeout(1200);
                 } else {
                     ports[i]->WaitPortBufferCompletion();
                 }
