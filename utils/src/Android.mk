@@ -11,6 +11,7 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libwrs_omxil_utils
+LOCAL_MULTILIB := 32
 
 LOCAL_CFLAGS :=
 
