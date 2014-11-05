@@ -9,7 +9,6 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libwrs_omxil_core_pvwrapped
-LOCAL_MULTILIB := 32
 
 LOCAL_CPPFLAGS :=
 

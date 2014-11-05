@@ -16,7 +16,6 @@ LOCAL_SRC_FILES := \
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libwrs_omxil_base
-LOCAL_MULTILIB := 32
 
 LOCAL_CPPFLAGS :=
 
@@ -43,7 +42,6 @@ include $(CLEAR_VARS)
 
 LOCAL_MODULE_TAGS := optional
 LOCAL_MODULE := libwrs_omxil_common
-LOCAL_MULTILIB := 32
 
 LOCAL_WHOLE_STATIC_LIBRARIES := \
 	libwrs_omxil_utils \
