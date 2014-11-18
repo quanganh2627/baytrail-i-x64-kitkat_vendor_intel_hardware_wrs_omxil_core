@@ -1045,6 +1045,10 @@ OMX_ERRORTYPE PortBase::TransState(OMX_U8 transition)
         {
             FlushPort();
             WaitPortBufferCompletion();
+        } else {
+            pthread_mutex_lock(&hdrs_lock);
+            buffer_hdrs_completion = !buffer_hdrs_completion;
+            pthread_mutex_unlock(&hdrs_lock);
         }
         portdefinition.bEnabled = OMX_FALSE;
     }
