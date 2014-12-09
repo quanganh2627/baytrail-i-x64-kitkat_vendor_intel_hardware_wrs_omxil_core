@@ -35,16 +35,16 @@ CModule::CModule(const OMX_STRING lname)
 {
     module = NULL;
     wrs_omxil_cmodule = NULL;
-
+	size_t len = strlen(lname);
     roles = NULL;
     nr_roles = 0;
 
-    memset(cname, 0, OMX_MAX_STRINGNAME_SIZE);
-
-    memset(this->lname, 0, OMX_MAX_STRINGNAME_SIZE);
-   // strncpy(this->name, name, OMX_MAX_STRINGNAME_SIZE);
-    strncpy(this->lname, lname, (strlen(lname) < OMX_MAX_STRINGNAME_SIZE) ? strlen(lname) : (OMX_MAX_STRINGNAME_SIZE-1));
-    this->lname[OMX_MAX_STRINGNAME_SIZE-1] = '\0';
+    memset(cname, 0, sizeof(cname));
+	
+    memset(this->lname, 0, sizeof(this->lname));
+	len = (len < sizeof(this->lname))? len: (sizeof(this->lname) - 1);
+    strncpy(this->lname, lname, len);
+    this->lname[sizeof(this->lname)-1] = '\0';
 }
 
 CModule::~CModule()
